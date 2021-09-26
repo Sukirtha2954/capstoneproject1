@@ -1,0 +1,24 @@
+<?php
+    $con = mysqli_connect('localhost','root','','capstoneproject');
+    $id = $_POST['id'];
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+    $phoneoremail = $_POST['phoneoremail'];
+    $password = $_POST['password'];
+    $guardianname = $_POST['guardianname'];
+    $guardianphoneoremail = $_POST['guardianphoneoremail'];
+     
+    $check_data = mysqli_query($con,"SELECT * FROM userdata WHERE phoneoremail = '$phoneoremail'");
+    $check = mysqli_num_rows($check_data);
+
+
+    if($check > 0){
+        header("Location:http://localhost/capstoneproject");
+    }else{
+        $input = mysqli_query($con,"INSERT INTO userdata (id,firstname,lastname,phoneoremail,password,guardianname,guardianphoneoremail)VALUES('$id','$firstname','$lastname','$phoneoremail','$password', '$guardianname', '$guardianphoneoremail')");
+        if($input){
+            header("Location:http://localhost/capstoneproject/index.html");
+        }
+    }
+
+?>
